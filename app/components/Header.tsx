@@ -65,7 +65,7 @@ const Header: FC<Props> = ({ activeItem }) => {
               </div>
               <HiOutlineUserCircle
                 size={25}
-                className="cursor-pointer dark:text-white text-black"
+                className="hidden 800px:block cursor-pointer dark:text-white text-black"
               />
             </div>
           </div>

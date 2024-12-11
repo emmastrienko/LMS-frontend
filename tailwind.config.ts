@@ -11,7 +11,7 @@ export default {
     extend: {
       fontFamily: {
         Poppins: ["var(--font-Poppins)"],
-        Josefin: ["var(--font-Josefin"],
+        Josefin: ["var(--font-Josefin)"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -15,17 +15,18 @@ type Props = {
 };
 
 const schema = Yup.object().shape({
+  name: Yup.string().required("Please enter your name!"),
   email: Yup.string()
     .email("Invalid email!")
     .required("Please enter your email!"),
   password: Yup.string().required("Please enter your password").min(6),
 });
 
-const Login: FC<Props> = ({ setRoute }) => {
+const SignUp: FC<Props> = ({ setRoute }) => {
   const [show, setShow] = useState(false);
 
   const formik = useFormik({
-    initialValues: { email: "", password: "" },
+    initialValues: { name: "", email: "", password: "" },
     validationSchema: schema,
     onSubmit: async ({ email, password }) => {
       console.log(email, password);
@@ -36,8 +37,27 @@ const Login: FC<Props> = ({ setRoute }) => {
 
   return (
     <div className="w-full">
-      <h1 className={`${styles.title}`}>Login with ELearning</h1>
+      <h1 className={`${styles.title}`}>Join to ELearning</h1>
       <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className={`${styles.label}`} htmlFor="name">
+            Enter your Name
+          </label>
+          <input
+            type="text"
+            name=""
+            value={values.name}
+            onChange={handleChange}
+            id="name"
+            placeholder="johndoe"
+            className={`${errors.name && touched.name && "border-red-500"} ${
+              styles.input
+            } `}
+          />
+          {errors.name && touched.name && (
+            <span className="text-red-500 pt-2 block">{errors.email}</span>
+          )}
+        </div>
         <label className={`${styles.label}`} htmlFor="email">
           Enter your Email
         </label>
@@ -88,7 +108,7 @@ const Login: FC<Props> = ({ setRoute }) => {
           <span className="text-red-500 pt-2 block">{errors.password}</span>
         )}
         <div className="w-full mt-5">
-          <input type="submit" value="Login" className={`${styles.button}`} />
+          <input type="submit" value="Sign Up" className={`${styles.button}`} />
         </div>
         <br />
         <h5 className="text-center pt-4 font-Poppins text-[14px] text-black dark:text-white">
@@ -99,12 +119,12 @@ const Login: FC<Props> = ({ setRoute }) => {
           <AiFillGithub size={30} className="cursor-pointer ml-2" />
         </div>
         <h5 className="text-center pt-4 font-Poppins text-[14px]">
-          Not have any account?{" "}
+          Already have an account?{" "}
           <span
             className="text-[#2190ff] pl-1 cursor-pointer"
             onClick={() => setRoute("Sign-Up")}
           >
-            Sign up
+            Sign in
           </span>
         </h5>
       </form>
@@ -113,4 +133,4 @@ const Login: FC<Props> = ({ setRoute }) => {
   );
 };
 
-export default Login;
+export default SignUp;

@@ -34,7 +34,7 @@ export const authApi = apiSlice.injectEndpoints({
     }),
     activation: builder.mutation({
       query: ({activation_token, activation_code}) => ({
-         url: "action-user",
+         url: "activate_user",
          method: "POST",
          body: {
           activation_token,

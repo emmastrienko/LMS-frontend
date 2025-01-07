@@ -46,7 +46,7 @@ const Login: FC<Props> = ({ setRoute, setOpen }) => {
     } else if (error) {
       toast.error("An unexpected error occurred.");
     }
-  }, [isSuccess, error]);
+  }, [isSuccess, error, setOpen]);
 
   const { errors, touched, values, handleChange, handleSubmit } = formik;
 

@@ -8,7 +8,10 @@ import { HiOutlineMenuAlt3, HiOutlineUserCircle } from "react-icons/hi";
 import CustomModal from "../utils/CustomModal";
 import Login from "../components/Auth/Login";
 import SignUp from "../components/Auth/SignUp";
-import  Verification from "../components/Auth/Verification"
+import Verification from "../components/Auth/Verification";
+import { useSelector } from "react-redux";
+import Image from "next/image";
+import defaultAvatar from "../../public/assets/avatar.jpg"
 
 type Props = {
   open: boolean;
@@ -21,6 +24,7 @@ type Props = {
 const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
   const [active, setActive] = useState(false);
   const [openSidebar, setOpenSidebar] = useState(false);
+  const { user } = useSelector((state: any) => state.auth);
 
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => {
@@ -38,6 +42,13 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
       setOpenSidebar(false);
     }
   };
+
+  console.log(user);
+
+  const avatarSrc =
+  user?.avatar && typeof user.avatar === "string" && user.avatar.trim() !== ""
+    ? user.avatar
+    : defaultAvatar;
 
   return (
     <div className="w-full relative">
@@ -69,11 +80,21 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
                   onClick={() => setOpenSidebar(true)}
                 />
               </div>
-              <HiOutlineUserCircle
-                size={25}
-                className="hidden 800px:block cursor-pointer dark:text-white text-black"
-                onClick={() => setOpen(true)}
-              />
+              {user ? (
+                <Link href="/profile">
+                  <Image
+                    src={avatarSrc}
+                    alt="User avartar"
+                    className="w-[30px] h-[30px] rounded-full cursor-pointer"
+                  />
+                </Link>
+              ) : (
+                <HiOutlineUserCircle
+                  size={25}
+                  className="hidden 800px:block cursor-pointer dark:text-white text-black"
+                  onClick={() => setOpen(true)}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -94,7 +115,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
               <br />
               <br />
               <p className="text-[16px] px-2 pl-2 text-black dark:text-white">
-                Copyright &copy 2024 ELearning
+                Copyright &copy; 2024 ELearning
               </p>
             </div>
           </div>

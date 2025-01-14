@@ -20,11 +20,6 @@ const SideBarProfile: FC<Props> = ({
   setActive,
   logOutHandler,
 }) => {
-  const avatarSrc =
-    user?.avatar && typeof user.avatar === "string" && user.avatar.trim() !== ""
-      ? user.avatar
-      : defaultAvatar;
-
   return (
     <div className="w-full">
       <div
@@ -34,8 +29,10 @@ const SideBarProfile: FC<Props> = ({
         onClick={() => setActive(1)}
       >
         <Image
-          src={avatarSrc}
+          src={user.avatar || avatar ? user.avatar.url || avatar : defaultAvatar}
           alt="User avatar."
+          width={20}
+          height={20}
           className="w-[20px] h-[20px] 800px:w-[30px] 800px:h-[30px] cursor-pointer rounded-full"
         />
         <h5 className="pl-2 800px:block hidden font-Poppins dark:text-white text-black">

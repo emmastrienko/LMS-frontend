@@ -78,11 +78,6 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
     }
   };
 
-  const avatarSrc =
-    user?.avatar && typeof user.avatar === "string" && user.avatar.trim() !== ""
-      ? user.avatar
-      : defaultAvatar;
-
   return (
     <div className="w-full relative">
       <div
@@ -116,9 +111,12 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
               {user ? (
                 <Link href="/profile">
                   <Image
-                    src={avatarSrc}
+                    src={user.avatar ? user.avatar.url : defaultAvatar}
+                    width={30}
+                    height={30}
                     alt="User avartar"
                     className="w-[30px] h-[30px] rounded-full cursor-pointer"
+                    style={{border: activeItem === 5 ? "2px solid #37a39a" : "none"}}
                   />
                 </Link>
               ) : (

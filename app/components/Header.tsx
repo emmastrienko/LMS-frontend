@@ -38,8 +38,6 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
     skip: !logout ? true : false,
   });
 
-  console.log(data);
-
   useEffect(() => {
     if (!user) {
       if (data) {

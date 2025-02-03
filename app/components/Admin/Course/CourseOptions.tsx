@@ -15,7 +15,7 @@ const CourseOptions: FC<Props> = ({ active, setActive }) => {
   ];
   return (
     <div>
-      {options.map((options: any, index: number) => (
+      {options.map((option: any, index: number) => (
         <div key={index} className={`w-full flex py-5`}>
           <div
             className={`w-[35px] h-[35px] rounded-full flex items-center justify-center ${
@@ -23,7 +23,7 @@ const CourseOptions: FC<Props> = ({ active, setActive }) => {
             } relative`}
           >
             <IoMdCheckmark className="text-[25px]" />
-            {index !== options.length - 1 && (
+            {index < options.length - 1 && (
               <div
                 className={`absolute h-[30px] w-1 ${
                   active + 1 > index ? "bg-blue-500" : "bg-[#384766]"
@@ -38,7 +38,7 @@ const CourseOptions: FC<Props> = ({ active, setActive }) => {
                 : "dark:text-white text-black"
             } text-[20px]`}
           >
-            {options}
+            {option}
           </h5>
         </div>
       ))}

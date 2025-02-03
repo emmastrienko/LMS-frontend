@@ -128,7 +128,7 @@ const CourseContent: FC<Props> = ({
         {courseContentData?.map((item: any, index: number) => {
           const showSectionInput =
             index === 0 ||
-            item.videSection !== courseContentData[index - 1].videoSection;
+            item.videoSection !== courseContentData[index - 1].videoSection;
 
           return (
             <>
@@ -247,7 +247,7 @@ const CourseContent: FC<Props> = ({
                       <br />
                     </div>
                     {item?.links.map((link: any, linkIndex: number) => (
-                      <div className="mb-3 block">
+                      <div className="mb-3 block" key={index}>
                         <div className="w-full flex items-center justify-between">
                           <label className={styles.label}>
                             Link {linkIndex + 1}

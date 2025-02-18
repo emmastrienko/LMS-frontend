@@ -13,6 +13,7 @@ import { format } from "timeago.js";
 import { Modal } from "@mui/material";
 import { styles } from "@/app/styles/style";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 type Props = {};
 
@@ -39,9 +40,9 @@ const AllCourses = (props: Props) => {
       renderCell: (params: any) => {
         return (
           <>
-            <Button>
+            <Link href={`/admin/edit-course/${params.row.id}`}>
               <FiEdit2 className="dark:text-white text-black" size={20} />
-            </Button>
+            </Link>
           </>
         );
       },
@@ -54,10 +55,10 @@ const AllCourses = (props: Props) => {
         return (
           <>
             <Button
-            onClick={() => {
-              setOpen(!open);
-              setCourseId(params.row.id);
-            }}
+              onClick={() => {
+                setOpen(!open);
+                setCourseId(params.row.id);
+              }}
             >
               <AiOutlineDelete
                 className="dark:text-white text-black"

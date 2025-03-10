@@ -275,8 +275,8 @@ const AdminSidebar = () => {
               {!isCollapsed && "Analytics"}
             </Typography>
             <Item
-              title="Analytics"
-              to="/admin/course-analytics"
+              title="Courses Analytics"
+              to="/admin/courses-analytics"
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -285,6 +285,13 @@ const AdminSidebar = () => {
               title="Orders Analytics"
               to="/admin/orders-analytics"
               icon={<MapOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Users Analytics"
+              to="/admin/users-analytics"
+              icon={<ManageHistoryIcon />}
               selected={selected}
               setSelected={setSelected}
             />

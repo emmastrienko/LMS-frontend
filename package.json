@@ -26,6 +26,7 @@
     "react-icons": "^5.4.0",
     "react-pro-sidebar": "^0.7.1",
     "react-redux": "^9.2.0",
+    "recharts": "^2.15.1",
     "timeago.js": "^4.0.2",
     "yup": "^1.5.0"
   },

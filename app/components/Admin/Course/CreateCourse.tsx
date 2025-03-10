@@ -35,6 +35,7 @@ const CreateCourse = () => {
     estimatedPrice: "",
     tags: "",
     level: "",
+    categories: "",
     demoUrl: "",
     thumbnail: "",
   });
@@ -46,6 +47,7 @@ const CreateCourse = () => {
       title: "",
       description: "",
       videoSection: "Untitled Section",
+      videoLength: "",
       links: [
         {
           title: "",
@@ -74,6 +76,7 @@ const CreateCourse = () => {
         videoUrl: courseContent.videoUrl,
         title: courseContent.title,
         description: courseContent.description,
+        videoLenght: courseContent.videoLength,
         videSection: courseContent.videoSection,
         links: courseContent.links.map((link) => ({
           title: link.title,
@@ -92,6 +95,7 @@ const CreateCourse = () => {
       tags: courseInfo.tags,
       thumbnail: courseInfo.thumbnail,
       level: courseInfo.level,
+      categories: courseInfo.categories,
       demoUrl: courseInfo.demoUrl,
       totalVideos: courseContentData.length,
       benefits: formattedBenefits,

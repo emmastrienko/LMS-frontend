@@ -69,7 +69,7 @@ const UserAnalytics = ({ isDashboard }: Props) => {
             } flex items-center justify-center`}
           >
             <ResponsiveContainer
-              width={isDashboard ? "100vh" : "90%"}
+              width="100%"
               height={!isDashboard ? "50%" : "100%"}
             >
               <AreaChart

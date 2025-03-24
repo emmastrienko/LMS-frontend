@@ -76,8 +76,8 @@ const CreateCourse = () => {
         videoUrl: courseContent.videoUrl,
         title: courseContent.title,
         description: courseContent.description,
-        videoLenght: courseContent.videoLength,
-        videSection: courseContent.videoSection,
+        videoLength: courseContent.videoLength,
+        videoSection: courseContent.videoSection,
         links: courseContent.links.map((link) => ({
           title: link.title,
           url: link.url,

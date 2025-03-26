@@ -14,8 +14,6 @@ const CourseContentList: FC<Props> = (props) => {
     new Set<string>()
   );
 
-  console.log(props.data)
-
   // Find unique video sections
   const videoSections: string[] = [
     ...new Set<string>(props.data?.map((item: any) => item.videoSection)),

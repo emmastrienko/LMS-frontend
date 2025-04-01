@@ -4,12 +4,14 @@ import Ratings from "@/app/utils/Ratings";
 import Link from "next/link";
 import React, { useState } from "react";
 import { IoCheckmarkDoneOutline, IoCloseOutline } from "react-icons/io5";
-import { useSelector } from "react-redux";
-import { format } from "timeago.js/lib/format";
+import { format } from "timeago.js";
 import CourseContentList from "../Course/CourseContentList";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckOutForm from "../Payment/CheckOutForm";
 import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
+import Image from "next/image";
+import avatarIcon from "../../../public/assets/avatar.png";
+import { VscVerifiedFilled } from "react-icons/vsc";
 
 type Props = {
   data: any;
@@ -32,6 +34,8 @@ const CourseDetails = ({ data, clientSecret, stripePromise }: Props) => {
   const handleOrder = (e: any) => {
     setOpen(true);
   };
+
+  console.log(data);
 
   return (
     <div>
@@ -129,18 +133,22 @@ const CourseDetails = ({ data, clientSecret, stripePromise }: Props) => {
                   <div className="w-full pb-4" key={index}>
                     <div className="flex">
                       <div className="w-[50px] h-[50px]">
-                        <div className="w-[50px] h-[50px] bg-slate-600 rounded-[50px] flex items-center justify-center cursor-pointer">
-                          <h1 className="uppercase text-[18px] text-black dark:text-white">
-                            {item.user.name.slice(0, 2)}
-                          </h1>
-                        </div>
+                        <Image
+                          src={
+                            item.user.avatar ? item.user.avatar.url : avatarIcon
+                          }
+                          width={50}
+                          height={50}
+                          alt=""
+                          className="w-[30px] h-[30px] rounded-full object-cover"
+                        />
                       </div>
                       <div className="hidden 800px:block pl-2">
                         <div className="flex items-center">
                           <h5 className="text-[18px] pr-2 text-black dark:text-white">
                             {item.user.name}
                           </h5>
-                          <Ratings rating={item.ratings} />
+                          <Ratings rating={item.rating} />
                         </div>
                         <p className="text-black dark:text-white">
                           {item.comment}
@@ -149,13 +157,41 @@ const CourseDetails = ({ data, clientSecret, stripePromise }: Props) => {
                           {format(item.createdAt)}
                         </small>
                       </div>
-                      <div className="pl-2 flex 800px:hidden items-center">
-                        <h5 className="text-[18px] pr-2 text-black dark:text-white">
-                          {item.user.name}
-                        </h5>
-                        <Ratings rating={item.ratings} />
+                      <div className="pl-2">
+                        <div className="flex 800px:hidden items-center">
+                          <h5 className="text-[18px] pr-2 text-black dark:text-white">
+                            {item.user.name}
+                          </h5>
+                          <Ratings rating={item.rating} />
+                        </div>
+                        
                       </div>
                     </div>
+                    {item.commentReplies.map((i: any, index: number) => (
+                      <div className="w-full flex 800px:ml-16 my-5 pl-2" key={index}>
+                        <div className="w-[50px] h-[50px]">
+                          <Image
+                            src={i.user.avatar ? i.user.avatar.url : avatarIcon}
+                            width={50}
+                            height={50}
+                            alt=""
+                            className="w-[30px] h-[30px] rounded-full object-cover"
+                          />
+                        </div>
+                        <div className="pl-2">
+                          <div className="flex items-center">
+                            <h5 className="text-[20px]">{i.user.name}</h5>{" "}
+                            {i.user.role == "admin" && (
+                              <VscVerifiedFilled className="text-blue-700 ml-2 text-[20px]" />
+                            )}
+                          </div>
+                          <p>{i.comment}</p>
+                          <small className="text-[#ffffff83]">
+                            {format(i.createdAt)}
+                          </small>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 )
               )}

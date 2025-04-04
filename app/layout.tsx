@@ -7,7 +7,11 @@ import { Toaster } from "react-hot-toast";
 import { Providers } from "./Provider";
 import { SessionProvider } from "next-auth/react";
 import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
-import Loader from "./components/Loader/Loader"
+import Loader from "./components/Loader/Loader";
+import socketIO from "socket.io-client";
+import { useEffect } from "react";
+const ENDPOINTS = process.env.NEXT_PUBLIC_SOCKET_SERVER_URI || "";
+const socketId = socketIO(ENDPOINTS, { transports: ["websocket"]});
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -46,11 +50,10 @@ export default function RootLayout({
 
 const Custom: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isLoading } = useLoadUserQuery({});
-  return (
-    <>
-    {
-      isLoading ? <Loader /> : <>{children}</>
-    }
-    </>
-  )
+
+  useEffect(() => {
+    socketId.on("connection", () => {});
+  }, [])
+
+  return <>{isLoading ? <Loader /> : <>{children}</>}</>;
 };

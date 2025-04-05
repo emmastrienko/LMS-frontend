@@ -11,6 +11,10 @@ export const navItemsData = [
     url: "/courses",
   },
   {
+    name: "About",
+    url: "/about",
+  },
+  {
     name: "Policy",
     url: "/policy",
   },
@@ -57,7 +61,7 @@ const NavItems: React.FC<Props> = ({ activeItem, isMobile }) => {
           </div>
           {navItemsData &&
             navItemsData.map((i, index) => (
-              <Link href="/" key={index} passHref>
+              <Link href={`${i.url}`} key={index} passHref>
                 <span
                   className={`${
                     activeItem === index

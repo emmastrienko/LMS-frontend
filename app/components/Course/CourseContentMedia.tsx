@@ -117,7 +117,7 @@ const CourseContentMedia = ({
       setAnswer("");
       refetch();
       toast.success("Answer added successfully");
-      if(user.role !== 'admin') {
+      if (user.role !== "admin") {
         socketId.emit("notification", {
           title: "New Reply Recieved",
           message: `You have a new question reply in ${data[activeVideo].title}`,
@@ -332,6 +332,7 @@ const CourseContentMedia = ({
               setAnswer={setAnswer}
               handleAnswerSubmit={handleAnswerSubmit}
               user={user}
+              questionId={questionId}
               setQuestionId={setQuestionId}
               answerCreationLoading={answerCreationLoading}
             />
@@ -438,24 +439,25 @@ const CourseContentMedia = ({
                           </small>
                         </div>
                       </div>
-                      {user.role === "admin" && (
-                        <span
-                          className={`${styles.label} !ml-10 cursor-pointer`}
-                          onClick={() => {
-                            setIsReviewReply(true);
-                            setReviewId(item._id);
-                          }}
-                        >
-                          Add Reply{" "}
-                          {/* <BiMessage
+                      {user.role === "admin" &&
+                        item.commentReplies.length === 0 && (
+                          <span
+                            className={`${styles.label} !ml-10 cursor-pointer`}
+                            onClick={() => {
+                              setIsReviewReply(true);
+                              setReviewId(item._id);
+                            }}
+                          >
+                            Add Reply{" "}
+                            {/* <BiMessage
                             size={20}
                             className="cursor-pointer"
                             fill="#ffffff83"
                           />{" "} */}
-                        </span>
-                      )}
+                          </span>
+                        )}
 
-                      {isReviewReply && (
+                      {isReviewReply && reviewId === item._id && (
                         <div className="w-full flex relative">
                           <input
                             type="text"
@@ -515,6 +517,7 @@ const CourseContentMedia = ({
 };
 
 const CommentReply = ({
+  questionId,
   data,
   activeVideo,
   answer,
@@ -535,6 +538,7 @@ const CommentReply = ({
             item={item}
             answer={answer}
             setAnswer={setAnswer}
+            questionId={questionId}
             setQuestionId={setQuestionId}
             handleAnswerSubmit={handleAnswerSubmit}
             answerCreationLoading={answerCreationLoading}
@@ -546,6 +550,7 @@ const CommentReply = ({
 };
 
 const CommentItem = ({
+  questionId,
   setQuestionId,
   item,
   answer,
@@ -578,7 +583,8 @@ const CommentItem = ({
           <span
             className="800px:pl-16 text-[#000000b8] dark:text-[#ffffff83] cursor-pointer mr-2"
             onClick={() => {
-              setReplyActive(!replyActive), setQuestionId(item._id);
+              setReplyActive(!replyActive);
+              setQuestionId(item._id);
             }}
           >
             {!replyActive
@@ -595,7 +601,8 @@ const CommentItem = ({
             {item.questionReplies.length}
           </span>
         </div>
-        {replyActive && (
+
+        {replyActive && questionId === item._id && (
           <>
             {item.questionReplies.map((item: any, index: any) => (
               <div

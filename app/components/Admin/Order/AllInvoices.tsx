@@ -73,32 +73,7 @@ const AllInvoices = ({ isDashboard }: Props) => {
         ]),
   ];
 
-  const rows: any = [
-    {
-      id: "12234567879676",
-      userName: "FDgfd HJGhjg",
-      userEmail: "test@gmail.com",
-      title: "React JS Course",
-      price: "$500",
-      created_at: "2 days ago",
-    },
-    {
-      id: "12234456789676",
-      userName: "dgf hhjg",
-      userEmail: "test1@gmail.com",
-      title: "React JS Course 1",
-      price: "$500",
-      created_at: "2 days ago",
-    },
-    {
-      id: "12234567896796",
-      userName: "FDgfd HJGhjg",
-      userEmail: "test@gmail.com",
-      title: "React JS Course",
-      price: "$500",
-      created_at: "2 days ago",
-    },
-  ];
+  const rows: any = [];
 
   if (ordersData) {
     ordersData.forEach((item: any) => {
@@ -127,7 +102,7 @@ const AllInvoices = ({ isDashboard }: Props) => {
               "& .MuiDataGrid-root": {
                 border: "none",
                 outline: "none",
-                "--DataGrid-containerBackground": "transparent"
+                "--DataGrid-containerBackground": "transparent",
               },
               "& .css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon": {
                 color: theme === "dark" ? "#fff" : "#000",
